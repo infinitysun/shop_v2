@@ -1,23 +1,25 @@
 <template>
   <div>
+    <div class="d-flex justify-content-between">
+      <h1>My shop</h1>
+      <router-link v-if="cartsLen > 0" :to="{ name: 'CartPage'}">Cart: <b>{{ cartsLen }}</b></router-link>
+      <div v-else>Cart: <b>0</b></div>
+    </div>
     <sCatalog />
-    <sCart v-if="carts.length > 0" :carts="carts" />
   </div>
 </template>
 
 <script>
 import sCatalog from '@/components/s-catalog'
-import sCart from '@/components/s-cart'
 
 export default {
   name: 's-main-wraper',
   components: {
-    sCatalog,
-    sCart
+    sCatalog
   },
   computed: {
-    carts () {
-      return this.$store.state.cart
+    cartsLen () {
+      return this.$store.state.cart.length
     }
   }
 }
